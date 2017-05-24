@@ -8,15 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ArticleController extends Controller
 {
- 
-     /**
-     * @Route("/about", name="about")
-     */
-    public function aboutAction(Request $request)
-    {
-        // replace this example code with whatever you need
-        return $this->render('article/about.html.twig', []);
-    }
     /**
      * @Route("/ignaces", name="ignaces")
      */
@@ -53,15 +44,14 @@ class ArticleController extends Controller
         return $this->render('article/tsth.html.twig', []);
     }
 
-        /**
-     * @Route("/contact", name="contact")
+    /**
+     * @Route("/new", name="new")
      */
-    public function contactAction(Request $request)
+    public function newAction(Request $request)
     {
         // replace this example code with whatever you need
-        return $this->render('article/contact.html.twig', []);
+        return $this->render('article/tsth.html.twig', []);
     }
-
 
 
 }

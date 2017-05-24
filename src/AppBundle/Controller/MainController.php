@@ -2,6 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Model\ArticleTarget;
+use AppBundle\Service\ArticleRepository;
+use JMS\DiExtraBundle\Annotation as DI;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -9,26 +12,36 @@ use Symfony\Component\HttpFoundation\Request;
 class MainController extends Controller
 {
     /**
+     * @var ArticleRepository
+     * @DI\Inject("repository.article")
+     */
+    public $articleRepository;
+
+    /**
      * @Route("/", name="homepage")
      */
     public function indexAction(Request $request)
     {
-        $articles = [
-            [
-                'title' => 'La ville d’Antioche, la ville de Homs en Syrie (Emeès)',
-                'author' => 'Harry Christiaens',
-                'last_modified' => \DateTime::createFromFormat('d-m-Y', '07-02-2017'),
-                'tag' => [''],
-                'target' => ''
-            ]
-        ];
+        $articles = $this->articleRepository->findAll();
 
         // replace this example code with whatever you need
         return $this->render('content/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
+            'articles' => $articles,
         ]);
     }
 
+    /**
+     * @Route("/target/{target}", name="article_by_target")
+     */
+    public function articleByTargetEasy(Request $request, $target)
+    {
+        $articles = $this->articleRepository->findByTarget($target);
+
+        // replace this example code with whatever you need
+        return $this->render("content/articles_{$target}.html.twig", [
+            'articles' => $articles,
+        ]);
+    }
 
     /**
      * @Route("/contact", name="contact")
@@ -37,7 +50,15 @@ class MainController extends Controller
     {
         // replace this example code with whatever you need
         return $this->render('content/contact.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
         ]);
+    }
+
+    /**
+     * @Route("/about", name="about")
+     */
+    public function aboutAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('article/about.html.twig', []);
     }
 }

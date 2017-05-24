@@ -61,6 +61,19 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
 
+sensio_framework_extra:
+    router:      { annotations: true }
+    request:     { converters: true, auto_convert: true }
+    view:        { annotations: true }
+    cache:       { annotations: true }
+    security:    { annotations: true }
+    psr_message: { enabled: false }
+
+jms_di_extra:
+    locations:
+        all_bundles: true
+        directories: ["%kernel.root_dir%/../src"]
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
