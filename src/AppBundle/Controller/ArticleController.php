@@ -8,6 +8,15 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ArticleController extends Controller
 {
+
+    /**
+     * @Route("/url", name="ROUTE_NAME")
+     */
+    public function methodAction(Request $request)
+    {
+        // on renvoie une réponse qui contient de l'HTML à l'aide de twig.
+        return $this->render('article/ton_html.html.twig');
+    }
  
      /**
      * @Route("/about", name="about")

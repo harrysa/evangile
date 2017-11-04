@@ -14,7 +14,7 @@
 <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="antioche-preview">
+                {# <div class="antioche-preview">
                     <a href="{{ path('antioche') }}">
                         <h2 class="post-title">
                             La ville d’Antioche, la ville de Homs en Syrie (Emeès)
@@ -23,53 +23,24 @@
                             De Jérusalem à Antioche
                         </h3>
                     </a>
-                    <p class="post-meta">Posted by <a href="#">Théophile</a> Février 17, 2017</p>
+                    <p class="post-meta">Posted by <a href="#">{{ article. }}</a> Février 17, 2017</p>
                 </div>
-                <hr>
+                <hr> #}
+
+                {% for article in articles %}
                 <div class="post-preview">
-                    <a href="post.html">
+                    <a href="{{ url(article.route) }}">
                         <h2 class="post-title">
-                            I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.
+                            {{ article.title }}
                         </h2>
                     </a>
-                    <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on September 18, 2014</p>
+                    <p class="post-meta">
+                    Posted by <a href="#">{{ article.author }}</a> le {{ article.created|date('d/m/Y') }}
+                    </p>
                 </div>
                 <hr>
-                <div class="post-preview">
-                    <a href="post.html">
-                        <h2 class="post-title">
-                            Science has not yet mastered prophecy
-                        </h2>
-                        <h3 class="post-subtitle">
-                            We predict too much for the next year and yet far too little for the next ten.
-                        </h3>
-                    </a>
-                    <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> Février 17, 2017</p>
-                </div>
-                <hr>
-                <div class="post-preview">
-                    <a href="post.html">
-                        <h2 class="post-title">
-                            Failure is not an option
-                        </h2>
-                        <h3 class="post-subtitle">
-                            Many say exploration is part of our destiny, but it’s actually our duty to future generations.
-                        </h3>
-                    </a>
-                    <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on July 8, 2014</p>
-                </div>
-                <hr>
-                <div class="post-preview">
-                    <a href="post.html">
-                        <h2 class="post-title">
-                            Tertulien , l'extraterrestre!
-                        </h2>
-                        <h3 class="post-subtitle">
-                            Many say exploration is part of our destiny, but it’s actually our duty to future generations.
-                        </h3>
-                    </a>
-                    <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> 25 Mars, 2017</p>
-                </div>
+                {% endfor %}
+                
                 <!-- Pager -->
                 <ul class="pager">
                     <li class="next">
